@@ -146,7 +146,7 @@ const ProfilePage = () => {
 	return (
 		<>
 			{
-				loading ? <div className='grid col-span-5 place-items-center min-h-screen'>
+				loading ? <div className='grid col-span-3 place-items-center min-h-screen'>
 				<div className="w-8 h-8 place-self-center border-4 border-gray-400 border-t-green-800 rounded-full animate-spin"></div>
 			  </div> : <div className='col-span-3 w-full  border-r border-gray-700 min-h-screen '>
 				{/* HEADER */}

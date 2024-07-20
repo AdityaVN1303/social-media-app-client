@@ -18,9 +18,11 @@ const Post = ({ poster }) => {
 	const postOwner = poster.user;
 	const [isLiked, setIsLiked] = useState(false);
 	const [likeLoading, setlikeLoading] = useState(false);
+	const [bookmarkLoading, setbookmarkLoading] = useState(false);
 	const [likeCount, setLikeCount] = useState(0);
 	const [post, setPost] = useState(poster);
 	const [isBookmarked, setIsBookmarked] = useState(false);
+	const [commentLoading, setcommentLoading] = useState(false);
 
 	const user = useSelector((store)=>store.auth.user);
 	useEffect(() => {
@@ -64,6 +66,7 @@ const Post = ({ poster }) => {
 	const handlePostComment = async (e) => {
 		e.preventDefault();
 		try {
+			setcommentLoading(true);
 			const response = await fetch (`${PROXY_URL}/api/posts/comment/${poster?._id}` , {
 				credentials : 'include' , 
 				method : "POST" , 
@@ -75,9 +78,12 @@ const Post = ({ poster }) => {
 
 			const data = await response.json();
 			if(!response.ok){
+				setcommentLoading(false);
 				toast(data?.error);
 				return;
 			}
+
+			setcommentLoading(false);
 			console.log(data);
 			setPost(data);
 			setComment("");
@@ -120,6 +126,7 @@ const Post = ({ poster }) => {
 
 	const toggleBookmark = async ()=>{
 		try {
+			setbookmarkLoading(true);
 			const response = await fetch(`${PROXY_URL}/api/users/toggle/${post._id}` , {
 				credentials : 'include' , 
 				method : "POST"
@@ -127,9 +134,11 @@ const Post = ({ poster }) => {
 
 			const data = await response.json();
 			if (!response.ok) {
+				setbookmarkLoading(false);
 				toast(data?.error);
 				return;
 			}
+			setbookmarkLoading(false);
 			toast(data?.message);
 			setIsBookmarked(data?.bookmark);
 
@@ -225,9 +234,11 @@ const Post = ({ poster }) => {
 											value={comment}
 											onChange={(e) => setComment(e.target.value)}
 										/>
-										<button type="submit" className=' bg-blue-500  text-white rounded-sm p-4'>
-												Post
-										</button>
+										{
+											commentLoading ? <div className="w-8 h-8 place-self-center border-4 border-gray-400 border-t-green-800 rounded-full animate-spin"></div>  : <button type="submit" className=' bg-blue-500  text-white rounded-sm p-4'>
+											Post
+									</button>
+										}
 									</form>
 								</div>
 								<form method='dialog' className='modal-backdrop'>
@@ -256,12 +267,14 @@ const Post = ({ poster }) => {
 							</div>
 							}
 						</div>
-						<div onClick={toggleBookmark} className='flex w-1/3 justify-end gap-2 items-center'>
+						{
+							bookmarkLoading ? <div className="w-4 h-4 place-self-center border-4 border-gray-400 border-t-green-800 rounded-full animate-spin"></div> : <div onClick={toggleBookmark} className='flex w-1/3 justify-end gap-2 items-center'>
 							{
 								!isBookmarked ? <FaRegBookmark className='w-4 h-4 text-slate-500 cursor-pointer' /> :
 								<FaBookmark className='w-4 h-4 cursor-pointer' />
 							}
 						</div>
+						}
 					</div>
 				</div>
 			</div>
