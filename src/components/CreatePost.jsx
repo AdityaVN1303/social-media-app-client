@@ -76,7 +76,7 @@ const CreatePost = () => {
 		  </div>  : <div className='flex p-4 items-start gap-4 border-b border-gray-700'>
 			<div className='avatar'>
 				<div className='w-8 rounded-full'>
-					<img className="rounded-full" src={user?.profileImg ? user?.profileImg : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
+					<img className=" w-full rounded-full" src={user?.profileImg ? user?.profileImg : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
 				</div>
 			</div>
 			<form className='flex flex-col gap-2 w-full' onSubmit={handleSubmit}>
@@ -87,7 +87,7 @@ const CreatePost = () => {
 					onChange={(e) => setText(e.target.value)}
 				/>
 				{image && (
-					<div className='relative w-72 mx-auto'>
+					<div className='relative w-32 mx-auto'>
 						<IoCloseSharp
 							className='absolute top-0 right-0 text-white bg-gray-800 rounded-full w-5 h-5 cursor-pointer'
 							onClick={() => {
@@ -95,7 +95,7 @@ const CreatePost = () => {
 								imgRef.current.value = null;
 							}}
 						/>
-						<img src={image && URL.createObjectURL(image)} className='w-full mx-auto h-72 object-contain rounded' />
+						<img src={image && URL.createObjectURL(image)} className='w-full mx-auto object-cover rounded' />
 					</div>
 				)}
 
