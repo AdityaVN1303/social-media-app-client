@@ -105,7 +105,7 @@ const CreatePost = () => {
 							className='fill-primary w-6 h-6 cursor-pointer'
 							onClick={() => imgRef.current.click()}
 						/>
-						<BsEmojiSmileFill onClick={()=>{setVisible(!visible)}} className='fill-primary w-5 h-5 cursor-pointer' />
+						<BsEmojiSmileFill onClick={()=>{setVisible(!visible)}} className='hidden lg:block fill-primary w-5 h-5 cursor-pointer' />
 						<div className="absolute top-10">
 					{visible && <Picker data={data} onEmojiSelect={addEmoji}/> }
 					</div>
