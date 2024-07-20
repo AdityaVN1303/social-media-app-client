@@ -1,1 +1,1 @@
-export const PROXY_URL = "https://social-media-app-server-lake.vercel.app"
+export const PROXY_URL = "https://social-media-app-server-kappa.vercel.app"
