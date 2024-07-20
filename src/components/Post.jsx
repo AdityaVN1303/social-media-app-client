@@ -161,9 +161,8 @@ const Post = ({ poster }) => {
 						<Link to={`/profile/${postOwner.username}`} className='font-bold'>
 							{postOwner.fullName}
 						</Link>
-						<span className='text-gray-700 flex gap-1 text-sm'>
+						<span className='text-gray-700 flex flex-col space-y-1 gap-1 text-sm'>
 							<Link to={`/profile/${postOwner.username}`}>@{postOwner.username}</Link>
-							<span>·</span>
 							<span>{ago}</span>
 						</span>
 						{isMyPost && (
